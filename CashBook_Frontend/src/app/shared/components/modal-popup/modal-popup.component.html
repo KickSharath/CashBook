@@ -1,0 +1,81 @@
+<!-- NewBook || UploadFile -->
+<div *ngIf="receivedData && receivedData?.isPopup && (receivedData?.action == 'AddNewBook' || receivedData?.action ==  'EditBook' || receivedData?.action == 'UploadFile')">
+    <div class="modal show" [class.show]="receivedData?.isPopup"
+        [style.display]="receivedData?.isPopup ? 'block' : 'none'" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" [ngSwitch]="receivedData?.action">
+                        <span *ngSwitchCase="'EditBook'">Rename Book</span>
+                        <span *ngSwitchCase="'AddNewBook'">Add New Book</span>
+                        <span *ngSwitchCase="'UploadFile'">Upload Transcations</span>
+                        <span *ngSwitchDefault>Error</span>
+                    </h1>
+                    <button type="button" class="btn-close" (click)="SentData(false)"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="book_name" class="col-form-label">Book Name:</label>
+                        <input type="text" class="form-control" id="book_name"
+                            [(ngModel)]="formData.book_name">
+                    </div>
+                    <div class="mb-3" *ngIf="receivedData?.action == 'UploadFile'">
+                        <input class="form-control" type="file" id="formFile" (change)="onFileSelected($event)" [accept]="fileAllowed">
+                        <div id="formFile" class="form-text">support only .csv/ .excel</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="SentData(false)">Close</button>
+                    <button type="button" class="btn btn-primary" (click)="saveData(receivedData?.action)">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Transaction -->
+<div *ngIf="receivedData && receivedData?.isPopup && (receivedData?.action == 'AddTransactionIn' || receivedData?.action == 'AddTransactionOut' || receivedData?.action == 'EditTransaction')">
+    <div class="offcanvas offcanvas-end" style="width: 37%;" [class.show]="receivedData?.isPopup"
+        [style.display]="receivedData?.isPopup ? 'block' : 'none'" tabindex="-1">
+    <div class="offcanvas-header border-bottom">
+        <h5 class="offcanvas-title" [ngSwitch]="formData?.transaction_type">
+            <span *ngSwitchCase="'in'" class="text-success">Add Cash In Entry</span>
+            <span *ngSwitchCase="'out'" class="text-danger">Add Cash Out Entry</span>
+            <span *ngSwitchDefault>Error</span>
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" (click)="SentData(false)"></button>
+    </div>
+    <div class="offcanvas-body h-100">
+        <div class="d-flex gap-3 mb-3">
+            <span class="border ps-3 pe-3 p-2 small-text rounded-5 cursor-pointer"[ngClass]="formData?.transaction_type == 'in'? 'text-bg-success border-success':''" (click)="formData.transaction_type = 'in'">Cash In</span>
+            <span class="border ps-3 pe-3 p-2 small-text rounded-5 cursor-pointer" [ngClass]="formData?.transaction_type == 'out'? 'text-bg-danger border-danger':''" (click)="formData.transaction_type = 'out'">Cash Out</span>
+        </div>
+
+        <div class="mb-3">
+            <label for="transaction_amount" class="form-label">Amount <span class="text-danger">*</span></label>
+            <input type="number" class="form-control" id="transaction_amount" [(ngModel)]="formData.transaction_amount" placeholder="123...">
+        </div>
+
+        <div class="mb-3">
+            <label for="transaction_remark" class="form-label">Remarks</label>
+            <input type="text" class="form-control" id="transaction_remark" [(ngModel)]="formData.remark" placeholder="Enter Remark...">
+        </div>
+
+        <div class="mb-3">
+            <label for="transaction_remark" class="form-label">Category</label>
+            <input type="text" class="form-control" id="transaction_category" [(ngModel)]="formData.category" placeholder="Enter Category...">
+        </div>
+
+        <div class="mb-3">
+            <label for="transaction_mode" class="form-label">Payment Mode</label>
+            <input type="text" class="form-control" id="transaction_mode" [(ngModel)]="formData.mode" placeholder="Enter Payment Mode...">
+        </div>
+    </div>
+    <div class="offcanvas-footer border-top p-3">
+        <button class="btn custom-btn" [ngClass]="formData?.transaction_type == 'in'?'btn-success':'btn-danger'" (click)="saveData(receivedData?.action)">Save Transaction</button>
+    </div>
+</div>
+
+</div>
+
+<div *ngIf="receivedData && receivedData?.isPopup" [ngClass]="(receivedData?.action == 'AddTransactionIn' || receivedData?.action == 'AddTransactionOut' || receivedData?.action == 'EditTransaction')?'offcanvas-backdrop':'modal-backdrop'" class="fade show" (click)="SentData(false)"></div>

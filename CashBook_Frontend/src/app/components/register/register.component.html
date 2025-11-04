@@ -1,0 +1,20 @@
+<div class="container w-50 mt-5">
+  <h2 class="mb-4">Register</h2>
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+  <form (ngSubmit)="register()">
+    <div class="mb-3">
+      <label for="user_name" class="form-label">Username</label>
+      <input type="text" [(ngModel)]="user_name" name="user_name" class="form-control" id="user_name" required>
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" [(ngModel)]="email" name="email" class="form-control" id="email" required>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" [(ngModel)]="password" name="password" class="form-control" id="password" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+    <button type="button" class="btn btn-link" (click)="goToLogin()">Login</button>
+  </form>
+</div>

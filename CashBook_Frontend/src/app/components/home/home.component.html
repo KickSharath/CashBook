@@ -1,0 +1,8 @@
+<div class="container w-75" *ngIf="sentData && sentData?.user_data">
+    <app-book-list *ngIf="currentPage == 'homePage'" [receivedData]="sentData" (sentData)="getData($event)"></app-book-list>
+    <app-view-book *ngIf="currentPage == 'viewPage'" [receivedData]="sentData" (sentData)="getData($event)"></app-view-book>
+</div>
+
+<div *ngIf="sentData && sentData?.isPopup">
+    <app-modal-popup  [receivedData]="sentData" (sentData)="getData($event)"></app-modal-popup>
+</div>

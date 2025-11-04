@@ -1,0 +1,19 @@
+<div class="overlay" *ngIf="loading$ | async">
+    <div class="card w-25">
+        <div class="card-header bg-white h6">Loading</div>
+        <div class="card-body pt-4 pb-3">
+            <div class="d-flex justify-content-center gap-2">
+                <div class="spinner-grow text-dark spinner-grow-sm" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <div class="spinner-grow text-dark spinner-grow-sm" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <div class="spinner-grow text-dark spinner-grow-sm" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+            <div class="text-center h6 mt-3">Please Wait...</div>
+        </div>
+    </div>
+</div>

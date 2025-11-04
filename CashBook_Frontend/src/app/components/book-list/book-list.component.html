@@ -1,0 +1,58 @@
+<div class="mt-3 mb-3">
+  <div>
+    <h5 class="ms-3">{{receivedData?.user_data?.user_name}}</h5>
+  </div>
+</div>
+<hr>
+<div class="d-flex gap-2">
+  <div class="w-75">
+    <div class="mb-5">
+      <input type="search" class="form-control w-50" name="" id="" placeholder="Search by book name...">
+    </div>
+
+    <div class="mb-5">
+      <!-- cal: <span *ngFor="let book of bookList">{{book?.balance}}+</span> -->
+      <app-mini-calculator [balances]="bookList"></app-mini-calculator>
+    </div>
+
+    <ul class="list-group list-group-flush">
+      <ng-container *ngIf="isLoading.loadBookFlag">
+        <li class="list-group-item" *ngFor="let i of [].constructor(6)">
+          <p class="placeholder-glow">
+            <!-- <span class="placeholder placeholder-lg w-100"></span> -->
+             <span class="placeholder col-6"></span>
+            <span class="placeholder w-75"></span>
+            <span class="placeholder" style="width: 25%;"></span>
+          </p>
+        </li>
+      </ng-container>
+      <ng-container *ngIf="!isLoading.loadBookFlag">
+        <span *ngIf="bookList?.length == 0" class="text-muted">No Book Found!</span>
+        <li class="list-group-item list-group-item-action list-group-item__hover" *ngFor="let book of bookList"
+          (click)="actionBook($event, 'viewBook', book)">
+          <div class="d-flex justify-content-between">
+            <div class="d-flex align-items-center gap-2">
+              <span [innerHTML]="bookmarkSVG" [ngStyle]="{ color: 'red', width: '32px', height: '32px' }"></span>
+              <div class="d-flex flex-column">
+                <span class="fw-medium text-dark">{{book.book_name}}</span>
+                <span style="font-size: small;" class="text-body-secondary">Updated 10 days ago</span>
+              </div>
+            </div>
+            <div>
+              <span class="fw-medium" [ngClass]="book.balance >= 0?'text-success':'text-danger'">{{book.balance |
+                number}}</span>
+              <span class="list-group-item__action-icons">
+                <i class="bi bi-pencil-fill ms-2 text-primary" (click)="actionBook($event, 'EditBook', book)"></i>
+                <i class="bi bi-trash-fill ms-2 text-danger" (click)="actionBook($event, 'deleteBook', book)"></i>
+              </span>
+            </div>
+          </div>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+  <div class="w-25">
+    <button class="btn btn-primary fw-medium w-100 mb-4" (click)="SentData('AddNewBook')">Add New Book</button>
+    <button class="btn btn-secondary fw-medium w-100" (click)="SentData('UploadFile')">Upload Transcations</button>
+  </div>
+</div>

@@ -1,0 +1,140 @@
+<div class="mt-3 mb-3">
+  <div class="d-flex ms-3 gap-2">
+      <i class="bi bi-arrow-left" (click)="SentData('viewHome')"></i> <h5>{{receivedData?.data?.book_name}}</h5>
+    </div>
+</div>
+<hr>
+<div class="container">
+  <div class="d-flex justify-content-between">
+    <div class="w-50">
+      <input type="search"  class="form-control" name="" id="" placeholder="Search by remark or amount...">
+    </div>
+    <div>
+      <button class="btn btn-success custom-btn" (click)="SentData('AddTransactionIn') ">Cash In</button>
+      <button class="btn btn-danger custom-btn ms-4" (click)="SentData('AddTransactionOut') ">Cash Out</button>
+    </div>
+  </div>
+
+  <div class="card mt-5">
+    <div class="card-body">
+      <div class="d-flex align-items-start text-start">
+        <div class="flex-fill d-flex gap-2">
+          <div><i class="bi bi-plus-circle-fill text-success fs-5 lh-lg"></i></div>
+          <div>
+            <span class="fw-semibold small-text lh-lg">Cash In</span><br>
+            <span class="h5">{{transactionsRespones?.total_cash_in | number}}</span>
+          </div>
+        </div>
+        <div class="vr mx-4"></div>
+        <div class="flex-fill d-flex gap-2">
+          <div><i class="bi bi-dash-circle-fill text-danger fs-5 lh-lg"></i></div>
+          <div>
+            <span class="fw-semibold small-text lh-lg">Cash Out</span><br>
+            <span class="h5">{{transactionsRespones?.total_cash_out | number}}</span>
+          </div>
+        </div>
+        <div class="vr mx-4"></div>
+        <div class="flex-fill d-flex gap-2">
+          <div class="">
+            <span [innerHTML]="equalCircleSVG" class="text-primary fs-5 d-inline-block" style="width:1.52rem; height:1.52rem;line-height: 1.71;"></span>
+
+          </div>
+          <div>
+            <span class="fw-semibold small-text lh-lg">Net Balance</span><br>
+            <span class="h5">{{transactionsRespones?.total_balance | number}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mt-5">
+
+    <div class="d-flex justify-content-between align-items-center ms-2 me-2">
+      <div>
+        <input type="search" class="form-control" name="" id="" placeholder="search">
+      </div>
+      <div>
+        <span class="small-text me-2 loading-blink__text" *ngIf="isDownlaoding?.flag">
+          <span class="text-uppercase" *ngFor="let file of isDownlaoding?.type;let i = index">{{file}}{{isDownlaoding?.type?.length != (i+1)?', ':''}}</span>
+           File<span *ngIf="isDownlaoding?.type?.length > 1">s</span> is Getting Downloaded, please wait”
+        </span>
+        <div class="btn-group btn-group" role="group" aria-label="Small button group">
+          <button type="button" class="btn btn-dark h5" (click)="downloadFile(receivedData?.data?.book_id, 'csv')"
+            [disabled]="isDownlaoding?.flag && isDownlaoding?.type?.includes('csv')">
+            <span *ngIf="!isDownlaoding?.type?.includes('csv')">
+              <i class="bi bi-filetype-csv"></i>
+            </span>
+            <span *ngIf="isDownlaoding?.type?.includes('csv')">
+              <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
+              <span role="status"></span>
+            </span>
+          </button>
+          <button type="button" class="btn btn-success h5" (click)="downloadFile(receivedData?.data?.book_id, 'xlsx')"
+            [disabled]="isDownlaoding?.flag && isDownlaoding?.type?.includes('xlsx')">
+            <span *ngIf="!isDownlaoding?.type?.includes('xlsx')">
+              <i class="bi bi-filetype-xlsx"></i>
+            </span>
+            <span *ngIf="isDownlaoding?.type?.includes('xlsx')">
+              <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
+              <span role="status"></span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <table mat-table [dataSource]="transactionsRespones?.transactions">
+
+      <ng-container matColumnDef="dataTime">
+        <th mat-header-cell *matHeaderCellDef> Date & Time </th>
+        <td mat-cell *matCellDef="let trans" class="fw-medium">
+          <span>{{trans.date}}</span> <br>
+          <span class="text-muted small-text">{{trans.time}}</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="remark">
+        <th mat-header-cell *matHeaderCellDef> Details </th>
+        <td mat-cell *matCellDef="let trans" class="fw-medium"> {{trans.remark}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef> Category </th>
+        <td mat-cell *matCellDef="let trans" class="fw-medium"> {{trans.category}} </td>
+      </ng-container>
+      
+      <ng-container matColumnDef="mode">
+        <th mat-header-cell *matHeaderCellDef> Mode </th>
+        <td mat-cell *matCellDef="let trans" class="fw-medium"> {{trans.mode}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef> Amount </th>
+        <td mat-cell *matCellDef="let trans" class="fw-medium"> 
+          <span [ngClass]="trans?.transaction_type =='out'?'text-danger':'text-success'" >
+            {{trans?.transaction_amount | number}}
+          </span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="balance">
+        <th mat-header-cell *matHeaderCellDef> Balance </th>
+        <td mat-cell *matCellDef="let trans" class="fw-medium"> {{trans.balance | number}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actionbtn">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let trans" class="fw-medium"> 
+          <span class="d-flex gap-2">
+            <i class="bi bi-pencil-fill ms-2 text-primary cursor-pointer" (click)="actionTransaction('EditTransaction', trans)"></i>
+            <i class="bi bi-trash-fill ms-2 text-danger cursor-pointer" (click)="actionTransaction('delete', trans)"></i>
+          </span>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+</div>

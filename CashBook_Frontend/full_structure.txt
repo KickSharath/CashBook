@@ -1,0 +1,72 @@
+D:.
+|   .editorconfig
+|   .gitignore
+|   angular.json
+|   full_structure.txt
+|   package-lock.json
+|   package.json
+|   README.md
+|   tsconfig.app.json
+|   tsconfig.json
+|   tsconfig.spec.json
+\---src
+    |   custom-theme.scss
+    |   favicon.ico
+    |   index.html
+    |   main.ts
+    |   styles.css
+    |   
+    +---app
+    |   |   app-routing.module.ts
+    |   |   app.component.css
+    |   |   app.component.html
+    |   |   app.component.spec.ts
+    |   |   app.component.ts
+    |   |   app.module.ts
+    |   |   auth.guard.ts
+    |   |   
+    |   +---components
+    |   |   +---book-list
+    |   |   |       book-list.component.css
+    |   |   |       book-list.component.html
+    |   |   |       book-list.component.ts
+    |   |   |       
+    |   |   +---home
+    |   |   |       home.component.css
+    |   |   |       home.component.html
+    |   |   |       home.component.spec.ts
+    |   |   |       home.component.ts
+    |   |   |       
+    |   |   +---login
+    |   |   |       login.component.css
+    |   |   |       login.component.html
+    |   |   |       login.component.spec.ts
+    |   |   |       login.component.ts
+    |   |   |       
+    |   |   +---modal-popup
+    |   |   |       modal-popup.component.css
+    |   |   |       modal-popup.component.html
+    |   |   |       modal-popup.component.spec.ts
+    |   |   |       modal-popup.component.ts
+    |   |   |       
+    |   |   +---register
+    |   |   |       register.component.css
+    |   |   |       register.component.html
+    |   |   |       register.component.spec.ts
+    |   |   |       register.component.ts
+    |   |   |       
+    |   |   \---view-book
+    |   |           view-book.component.css
+    |   |           view-book.component.html
+    |   |           view-book.component.ts
+    |   |           
+    |   +---services
+    |   |       cashbook.service.ts
+    |   |       user.service.ts
+    |   |       
+    |   \---share
+    |           svg.ts
+    |           
+    \---assets
+            .gitkeep
+            
