@@ -6,3 +6,12 @@
   display: inline;
   cursor: pointer;
 }
+
+.view-clipboard_text{
+  display: none;
+  cursor: pointer;
+}
+
+.view-clipboard:hover .view-clipboard_text {
+  display:unset;
+}

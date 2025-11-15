@@ -89,5 +89,15 @@ export class BookListComponent implements OnInit {
     }
     this.sentData.emit(send)
   }
+
+  copyToBoard(){
+    const text = this.bookList.map(d=> {
+      return `${d.book_name}: ${d.balance}`
+    }).join('\n')
+    
+    navigator.clipboard.writeText(text).then(() => {
+      // console.log('Copied!');
+    });
+  }
   
 }

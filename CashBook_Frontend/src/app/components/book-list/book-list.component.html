@@ -13,6 +13,9 @@
     <div class="mb-5">
       <!-- cal: <span *ngFor="let book of bookList">{{book?.balance}}+</span> -->
       <app-mini-calculator [balances]="bookList"></app-mini-calculator>
+      <div class="text-end mt-1 view-clipboard" (click)="copyToBoard()">
+        <small class="pe-1 text-muted view-clipboard_text">Copy to ClipBoard</small><i class="bi bi-copy cursor-pointer"></i>
+      </div>
     </div>
 
     <ul class="list-group list-group-flush">
@@ -27,7 +30,7 @@
         </li>
       </ng-container>
       <ng-container *ngIf="!isLoading.loadBookFlag">
-        <span *ngIf="bookList?.length == 0" class="text-muted">No Book Found!</span>
+        <span *ngIf="bookList.length == 0" class="text-muted">No Book Found!</span>
         <li class="list-group-item list-group-item-action list-group-item__hover" *ngFor="let book of bookList"
           (click)="actionBook($event, 'viewBook', book)">
           <div class="d-flex justify-content-between">
