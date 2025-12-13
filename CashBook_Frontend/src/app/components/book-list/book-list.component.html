@@ -12,7 +12,7 @@
 
     <div class="mb-5">
       <!-- cal: <span *ngFor="let book of bookList">{{book?.balance}}+</span> -->
-      <app-mini-calculator [balances]="bookList"></app-mini-calculator>
+      <app-mini-calculator [balances]="bookList" (totalExpression)="getTotalExpression($event)"></app-mini-calculator>
       <div class="text-end mt-1 view-clipboard" (click)="copyToBoard()">
         <small class="pe-1 text-muted view-clipboard_text">Copy to ClipBoard</small><i class="bi bi-copy cursor-pointer"></i>
       </div>

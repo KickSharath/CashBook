@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 
 @Component({
   selector: 'app-mini-calculator',
@@ -7,6 +7,7 @@ import { Component, Input, OnChanges } from '@angular/core';
 })
 export class MiniCalculatorComponent implements OnChanges {
   @Input() balances: { balance: number }[] = [];
+  @Output() totalExpression = new EventEmitter<string>();
 
   defaultBalances: { balance: number }[] = [];
   currentBalances: { balance: number, isUser?: boolean }[] = [];
@@ -45,6 +46,7 @@ export class MiniCalculatorComponent implements OnChanges {
     const nums = this.currentBalances.map(b => Number(b.balance) || 0);
     this.total = nums.reduce((sum, val) => sum + val, 0);
     this.expression = nums.join(' + ');
+    this.totalExpression.emit(this.expression+' = '+ this.total)
   }
 
   get removedDefaults() {

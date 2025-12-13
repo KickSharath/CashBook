@@ -19,6 +19,7 @@ export class BookListComponent implements OnInit {
   selectedBook: any | null = null;
   uploadFile: File | null = null;
   isLoading: any = {loadBookFlag: false}
+  currentExpression: any = "Getting Expression..."
 
   constructor(private cashbookService: CashbookService, private sanitizer: DomSanitizer) {
     this.getSVG()
@@ -91,13 +92,19 @@ export class BookListComponent implements OnInit {
   }
 
   copyToBoard(){
-    const text = this.bookList.map(d=> {
+    let text = this.bookList.map(d=> {
       return `${d.book_name}: ${d.balance}`
     }).join('\n')
+
+    text = `${text}\n\n\n${this.currentExpression}`;
     
     navigator.clipboard.writeText(text).then(() => {
       // console.log('Copied!');
     });
+  }
+
+  getTotalExpression(event:any){
+    this.currentExpression = event
   }
   
 }
