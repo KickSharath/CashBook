@@ -11,3 +11,8 @@
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.position-fixed.top-0.end-0 {
+  z-index: 9999 !important;
+}
+

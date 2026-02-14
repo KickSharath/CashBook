@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BookListComponent } from './components/book-list/book-list.component';
@@ -30,6 +31,7 @@ import { MiniCalculatorComponent } from './shared/components/mini-calculator/min
   ],
   imports: [
     BrowserModule, 
+    BrowserAnimationsModule,
     FormsModule, 
     HttpClientModule, 
     MatTableModule,

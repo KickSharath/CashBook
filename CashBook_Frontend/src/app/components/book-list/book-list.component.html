@@ -13,8 +13,16 @@
     <div class="mb-5">
       <!-- cal: <span *ngFor="let book of bookList">{{book?.balance}}+</span> -->
       <app-mini-calculator [balances]="bookList" (totalExpression)="getTotalExpression($event)"></app-mini-calculator>
-      <div class="text-end mt-1 view-clipboard" (click)="copyToBoard()">
-        <small class="pe-1 text-muted view-clipboard_text">Copy to ClipBoard</small><i class="bi bi-copy cursor-pointer"></i>
+      <div class="d-flex gap-2
+       justify-content-end w-100">
+        <div class="mt-1 view-clipboard" (click)="actionButton('copy')" #copyTooltip Tooltip="Copy to ClipBoard" tooltipPosition="bottom">
+          <!-- <small class="pe-1 text-muted view-clipboard_text">Copy to ClipBoard</small> -->
+          <i class="bi bi-copy cursor-pointer"></i>
+        </div>
+        <div class="mt-1" (click)="actionButton('telegram')" Tooltip="Share on Telegram" tooltipPosition="bottom">
+          <!-- <small class="pe-1 text-muted">1</small> -->
+          <i class="bi bi-telegram cursor-pointer"></i>
+        </div>
       </div>
     </div>
 

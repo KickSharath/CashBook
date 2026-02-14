@@ -1,7 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { CashbookService } from '../../core/services/cashbook.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { bookmarkSVG } from '../../shared/utils/svg'
+import { TooltipDirective } from '../../shared/directives/tooltip.directive';
+import { ToastService } from '../../core/services/toast.service';
 
 @Component({
   selector: 'app-book-list',
@@ -11,6 +13,7 @@ import { bookmarkSVG } from '../../shared/utils/svg'
 export class BookListComponent implements OnInit {
   @Input() receivedData:any;
   @Output() sentData = new EventEmitter<any>();
+  @ViewChild(TooltipDirective) tooltipDirective!: TooltipDirective;
 
   bookmarkSVG!: SafeHtml;
 
@@ -21,7 +24,7 @@ export class BookListComponent implements OnInit {
   isLoading: any = {loadBookFlag: false}
   currentExpression: any = "Getting Expression..."
 
-  constructor(private cashbookService: CashbookService, private sanitizer: DomSanitizer) {
+  constructor(private cashbookService: CashbookService, private sanitizer: DomSanitizer, private toastService: ToastService) {
     this.getSVG()
   }
 
@@ -91,20 +94,32 @@ export class BookListComponent implements OnInit {
     this.sentData.emit(send)
   }
 
-  copyToBoard(){
+  getTotalExpression(event:any){
+    this.currentExpression = event
+  }
+
+  actionButton(type: string){
+    const messageService =['telegram']
+
     let text = this.bookList.map(d=> {
       return `${d.book_name}: ${d.balance}`
     }).join('\n')
 
-    text = `${text}\n\n\n${this.currentExpression}`;
-    
-    navigator.clipboard.writeText(text).then(() => {
-      // console.log('Copied!');
-    });
+    text = `${text}\n\n\n${this.currentExpression}`
+
+    if(type === 'copy'){
+      this.copyToBoard(text)
+    }else if(messageService.includes(type)){
+      this.toastService.info('This feature is coming soon! Stay tuned.')
+    }
   }
 
-  getTotalExpression(event:any){
-    this.currentExpression = event
+  copyToBoard(text: string){    
+    navigator.clipboard.writeText(text).then(() => {
+      if (this.tooltipDirective) {
+        this.tooltipDirective.showTemporaryTooltip('Copied!', '#28a745');
+      }
+    });
   }
   
 }

@@ -17,3 +17,29 @@ export const equalCircleSVG = `
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56">
   <path fill="currentColor" d="M27.9999 51.9063C41.0546 51.9063 51.9063 41.0781 51.9063 28C51.9063 14.9453 41.0312 4.0937 27.9765 4.0937C14.8983 4.0937 4.0937 14.9453 4.0937 28C4.0937 41.0781 14.9218 51.9063 27.9999 51.9063ZM18.6952 25.3516C17.4296 25.3516 16.5624 24.7422 16.5624 23.5C16.5624 22.2344 17.3827 21.6016 18.6952 21.6016L37.2109 21.6016C38.5468 21.6016 39.3436 22.2344 39.3436 23.5C39.3436 24.7422 38.4999 25.3516 37.2109 25.3516ZM18.6952 34.4688C17.4296 34.4688 16.5624 33.8359 16.5624 32.5937C16.5624 31.3281 17.3827 30.6953 18.6952 30.6953L37.2109 30.6953C38.5468 30.6953 39.3436 31.3281 39.3436 32.5937C39.3436 33.8359 38.4999 34.4688 37.2109 34.4688Z"/>
 </svg>`;
+
+export const successSVG = `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#28a745" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <polyline points="20 6 9 17 4 12"></polyline>
+</svg>`;
+
+export const errorSVG = `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#dc3545" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="10"></circle>
+  <line x1="15" y1="9" x2="9" y2="15"></line>
+  <line x1="9" y1="9" x2="15" y2="15"></line>
+</svg>`;
+
+export const warningSVG = `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#ffc107" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3.05h16.94a2 2 0 0 0 1.71-3.05l-8.47-14.14a2 2 0 0 0-3.42 0z"></path>
+  <line x1="12" y1="9" x2="12" y2="13"></line>
+  <line x1="12" y1="17" x2="12.01" y2="17"></line>
+</svg>`;
+
+export const infoSVG = `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#17a2b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="10"></circle>
+  <line x1="12" y1="16" x2="12" y2="12"></line>
+  <line x1="12" y1="8" x2="12.01" y2="8"></line>
+</svg>`;

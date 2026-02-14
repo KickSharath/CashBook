@@ -1,0 +1,46 @@
+::ng-deep .toast {
+  min-width: 300px;
+  animation: slideIn 0.3s ease-out;
+  border: 1px solid #dee2e6;
+}
+
+::ng-deep .toast-header {
+  border-bottom: 1px solid #dee2e6;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+::ng-deep .toast-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+::ng-deep .toast-body {
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+}
+
+::ng-deep .btn-close {
+  margin: 0;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  ::ng-deep .toast {
+    min-width: auto;
+    width: 100%;
+  }
+} 
