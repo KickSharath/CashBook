@@ -99,18 +99,42 @@ export class BookListComponent implements OnInit {
   }
 
   actionButton(type: string){
-    const messageService =['telegram']
+    const messageService =['Telegram']
 
-    let text = this.bookList.map(d=> {
-      return `${d.book_name}: ${d.balance}`
-    }).join('\n')
-
-    text = `${text}\n\n\n${this.currentExpression}`
+    let text = '';
 
     if(type === 'copy'){
+      text = this.bookList.map(d=> {
+        return `• ${d.book_name}: ${d.balance}`
+      }).join('\n')
+
+      text = `${text}\n\n\n${this.currentExpression}`
+
       this.copyToBoard(text)
     }else if(messageService.includes(type)){
-      this.toastService.info('This feature is coming soon! Stay tuned.')
+      text = this.bookList.map(d => {
+        return `• <b>${d.book_name}</b>: <tg-spoiler>${d.balance}</tg-spoiler>`;
+      }).join('\n');
+
+      text = `${text}\n\n<tg-spoiler>${this.currentExpression}</tg-spoiler>`;
+
+      this.cashbookService.sendMessage(type, { message: text }).subscribe({
+        next: (res: any) => {
+          if (res && res.message && res.status_code) {
+            if (res.status_code === 200) {
+              this.toastService.success(res.message);
+            } else {
+              this.toastService.error(res.message);
+            }
+          } else {
+            this.toastService.error('Failed to send message. Invalid response.');
+          }
+        },
+        error: (err: any) => {
+          console.error(err);
+          this.toastService.error('Failed to send message. Please try again.');
+        }
+      })
     }
   }
 

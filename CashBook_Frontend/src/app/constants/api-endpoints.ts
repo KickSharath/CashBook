@@ -21,3 +21,7 @@ export const AUTH_API = {
     LOGIN: `${BASE_URL}/auth/login`,
     GETUSER: `${BASE_URL}/auth/get-user`
 }
+
+export const MESSAGE_SERVICES = {
+  SENTMESSAGE: (servicesType: string) => `${BASE_URL}/message/send-message/${servicesType}`
+}

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CASHBOOK_API } from '../../constants/api-endpoints';
+import { CASHBOOK_API, MESSAGE_SERVICES } from '../../constants/api-endpoints';
 
 
 @Injectable({ providedIn: 'root' })
@@ -53,5 +53,9 @@ export class CashbookService {
 
   downloadTransactions(bookId: string, fileType: 'csv' | 'xlsx' | 'pdf') {
     return this.http.get(CASHBOOK_API.EXPORT(bookId, fileType), { responseType: 'blob', headers: this.skipLoaderHeader });
+  }
+
+  sendMessage(servicesType: string, payload: any): Observable<any> {
+    return this.http.post(MESSAGE_SERVICES.SENTMESSAGE(servicesType), payload);
   }
 }
