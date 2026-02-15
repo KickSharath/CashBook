@@ -1,14 +1,11 @@
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
-import os
-from dotenv import load_dotenv
+from .config import settings
 
-load_dotenv()
-
-MONGO_USERNAME = os.getenv("MONGO_USERNAME")
-MONGO_PASSWORD = os.getenv("MONGO_PASSWORD")
-MONGO_HOST = os.getenv("MONGO_HOST")
-MONGO_DB = os.getenv("MONGO_DB")
+MONGO_USERNAME = settings.MONGO_USERNAME
+MONGO_PASSWORD = settings.MONGO_PASSWORD
+MONGO_HOST = settings.MONGO_HOST
+MONGO_DB = settings.MONGO_DB
 
 uri = f"mongodb+srv://{MONGO_USERNAME}:{MONGO_PASSWORD}@{MONGO_HOST}/{MONGO_DB}?retryWrites=true&w=majority"
 
