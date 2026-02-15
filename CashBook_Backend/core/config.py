@@ -12,6 +12,10 @@ class Settings(BaseSettings):
     MONGO_HOST: Optional[str] = Field(default=None, alias="MONGO_HOST")
     MONGO_DB: Optional[str] = Field(default=None, alias="MONGO_DB")
 
+    # Telegram Bot configuration
+    TELEGRAM_BOT_TOKEN: Optional[str] = Field(default=None, alias="TELEGRAM_BOT_TOKEN")
+    TELEGRAM_GROUP_CHAT_ID: Optional[int] = Field(default=None, alias="TELEGRAM_GROUP_CHAT_ID")
+
     class Config:
         env_file = ".env"
         case_sensitive = True
