@@ -78,12 +78,6 @@ SECRET_KEY=your-secret-key
 DATABASE_URL=sqlite:///db.sqlite3
 ```
 
-## Contributing
-
-1. Create a new branch
-2. Make your changes
-3. Submit a pull request
-
 ## License
 
 [MIT License](LICENSE)
