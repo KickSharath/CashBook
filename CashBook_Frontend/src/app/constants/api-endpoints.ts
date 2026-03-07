@@ -1,4 +1,5 @@
-export const BASE_URL = 'http://127.0.0.1:8000/api';
+// export const BASE_URL = 'http://127.0.0.1:8000/api';
+export const BASE_URL = 'https://cashbook-n7uo.onrender.com/api';
 
 export const CASHBOOK_API = {
   // BASE: `${BASE_URL}/cashbook`,
