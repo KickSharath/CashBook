@@ -25,7 +25,7 @@ app = FastAPI(docs_url=None, redoc_url=None, title="Cash Book", lifespan=lifespa
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:4200", "https://incandescent-souffle-03646b.netlify.app/"],
+    allow_origins=["http://localhost:4200", "https://incandescent-souffle-03646b.netlify.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
