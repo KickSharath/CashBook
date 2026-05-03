@@ -40,11 +40,10 @@ Located in `CashBook_Backend/`
 ### Setup
 ```bash
 cd CashBook_Backend
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+`python -m venv venv
+`source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
-python manage.py migrate
-python manage.py runserver
+uvicorn main:app --reload
 ```
 
 The API will be available at `http://localhost:8000`
@@ -58,9 +57,10 @@ The API will be available at `http://localhost:8000`
 - Run `ng e2e` to execute end-to-end tests
 
 ### Backend Development
-- Activate virtual environment
-- Run `python manage.py runserver` for development server
-- Run `python manage.py test` for running tests
+- Activate virtual environment  
+- Run `uvicorn main:app --reload` for development server  
+- Access API at `http://127.0.0.1:8000`  
+- Use `/docs` for interactive API testing (if enabled)  
 
 ## Environment Variables
 
